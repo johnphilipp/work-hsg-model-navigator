@@ -8,7 +8,7 @@ import { NavLink } from "../utils/NavLink";
 
 function MobileNavLink({ href, children }) {
   return (
-    <Popover.Button as={Link} href={href} className="block w-full p-2">
+    <Popover.Button as={Link} to={href} className="block w-full p-2">
       {children}
     </Popover.Button>
   );
