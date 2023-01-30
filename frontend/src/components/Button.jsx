@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import clsx from "clsx";
 
 const baseStyles = {
@@ -42,7 +42,7 @@ export function Button({
   );
 
   return href ? (
-    <Link href={href} className={className} {...props} />
+    <Link to={href} className={className} {...props} />
   ) : (
     <button className={className} {...props} />
   );
