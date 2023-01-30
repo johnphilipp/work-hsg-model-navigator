@@ -6,6 +6,7 @@ import { AuthLayout } from "../components/AuthLayout";
 import { Button } from "../components/Button";
 import { TextField } from "../components/Fields";
 import { Logo } from "../components/Logo";
+import { Container } from "../components/Container";
 
 async function loginUser(credentials) {
   console.log("post");
@@ -43,7 +44,7 @@ export default function Login({ setToken }) {
   };
 
   return (
-    <>
+    <Container>
       <AuthLayout>
         <div className="flex flex-col">
           <Link to="/" aria-label="Home">
@@ -104,7 +105,7 @@ export default function Login({ setToken }) {
           </span>
         </form>
       </AuthLayout>
-    </>
+    </Container>
   );
 }
 

@@ -109,6 +109,7 @@ export function HeaderPublic() {
             </div>
           </div>
         </nav>
+        <hr className="mt-4" />
       </Container>
     </header>
   );

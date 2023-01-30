@@ -15,25 +15,21 @@ function App() {
   if (!token) {
     return (
       <BrowserRouter>
-        <Container>
-          <HeaderPublic /> {/* Change header to not display memu */}
-          <Login setToken={setToken} />
-        </Container>
+        <HeaderPublic /> {/* Change header to not display memu */}
+        <Login setToken={setToken} />
       </BrowserRouter>
     );
   }
 
   return (
     <BrowserRouter>
-      <Container>
-        <HeaderPrivate />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/models" element={<Models />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </Container>
+      <HeaderPrivate />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/models" element={<Models />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </BrowserRouter>
   );
 }
