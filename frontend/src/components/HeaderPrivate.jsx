@@ -79,7 +79,18 @@ function MobileNavigation() {
             <MobileNavLink href="/dashboard">Dashboard</MobileNavLink>
             <MobileNavLink href="/models">Models</MobileNavLink>
             <hr className="mt-2 mb-4 border-slate-300/40" />
-            {/* button */}
+            <form onSubmit={localStorage.removeItem("token")}>
+              <Button
+                type="submit"
+                variant="solid"
+                color="blue"
+                className="w-full"
+              >
+                <span>
+                  Sign out <span aria-hidden="true">&rarr;</span>
+                </span>
+              </Button>
+            </form>
           </Popover.Panel>
         </Transition.Child>
       </Transition.Root>
@@ -110,25 +121,25 @@ export function HeaderPrivate() {
           </div>
           <div className="flex items-center gap-x-5 md:gap-x-8">
             <div className="hidden md:block">
-              {/* <form onsubmit={console.log("Test")}>
-                <button type="submit">Submit</button>
-              </form> */}
-              <Button
-                type="button"
-                variant="solid"
-                color="blue"
-                className="w-full"
-              >
-                <span>
-                  Sign out (todo) <span aria-hidden="true">&rarr;</span>
-                </span>
-              </Button>
+              <form onSubmit={localStorage.removeItem("token")}>
+                <Button
+                  type="submit"
+                  variant="solid"
+                  color="blue"
+                  className="w-full"
+                >
+                  <span>
+                    Sign out <span aria-hidden="true">&rarr;</span>
+                  </span>
+                </Button>
+              </form>
             </div>
             <div className="-mr-1 md:hidden">
               <MobileNavigation />
             </div>
           </div>
         </nav>
+        <hr className="mt-4" />
       </Container>
     </header>
   );
