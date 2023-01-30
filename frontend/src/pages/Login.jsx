@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-import { AuthLayout } from "../components/utils/AuthLayout";
-import { Button } from "../components/utils/Button";
-import { TextField } from "../components/utils/Fields";
-import { Logo } from "../components/utils/Logo";
+import { AuthLayout } from "../components/AuthLayout";
+import { Button } from "../components/Button";
+import { TextField } from "../components/Fields";
+import { Logo } from "../components/Logo";
 
 async function loginUser(credentials) {
   console.log("post");
@@ -34,6 +34,7 @@ export default function Login({ setToken }) {
         console.log(token);
         setErrorMsg(token.detail);
       } else {
+        console.log("Credentials correct");
         setToken(token);
       }
     } catch (e) {
