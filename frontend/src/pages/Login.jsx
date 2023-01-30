@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import { AuthLayout } from "../components/utils/AuthLayout";
@@ -6,7 +7,40 @@ import { Button } from "../components/utils/Button";
 import { TextField } from "../components/utils/Fields";
 import { Logo } from "../components/utils/Logo";
 
-export default function Login() {
+async function loginUser(credentials) {
+  console.log("post");
+  return fetch("http://localhost:8000/login/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  }).then((data) => data.json());
+}
+
+export default function Login({ setToken }) {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const token = await loginUser({
+        email,
+        password,
+      });
+      if ("status_code" in token) {
+        console.log(token);
+        setErrorMsg(token.detail);
+      } else {
+        setToken(token);
+      }
+    } catch (e) {
+      setErrorMsg(e.toString());
+    }
+  };
+
   return (
     <>
       <AuthLayout>
@@ -29,12 +63,17 @@ export default function Login() {
             </p>
           </div>
         </div>
-        <form action="#" className="mt-10 grid grid-cols-1 gap-y-8">
+        <form
+          onSubmit={handleSubmit}
+          action="#"
+          className="mt-10 grid grid-cols-1 gap-y-8"
+        >
           <TextField
             label="Email address"
             id="email"
             name="email"
             type="email"
+            onChange={(e) => setEmail(e.target.value)}
             autoComplete="email"
             required
           />
@@ -43,6 +82,7 @@ export default function Login() {
             id="password"
             name="password"
             type="password"
+            onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
             required
           />
@@ -58,8 +98,15 @@ export default function Login() {
               </span>
             </Button>
           </div>
+          <span className="mb-3 block text-sm font-medium text-red-700">
+            {errorMsg}
+          </span>
         </form>
       </AuthLayout>
     </>
   );
 }
+
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired,
+};
