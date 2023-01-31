@@ -1,4 +1,5 @@
 import { Container } from "../components/Container";
+import React, { useState } from "react";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import { AiOutlineAudio, AiOutlinePicture } from "react-icons/ai";
 import { FaRegObjectGroup } from "react-icons/fa";
@@ -147,6 +148,27 @@ const modelList = [
 ];
 
 const Models = () => {
+  const checkboxCategories = [
+    ...new Set(modelList.map((category) => category.category)),
+  ];
+  const [selectedCategories, setSelectedCategories] =
+    useState(checkboxCategories);
+
+  const handleCheckboxChange = (e) => {
+    const { value } = e.target;
+    if (selectedCategories.includes(value)) {
+      setSelectedCategories(
+        selectedCategories.filter((item) => item !== value)
+      );
+    } else {
+      setSelectedCategories([...selectedCategories, value]);
+    }
+  };
+
+  const filteredModelList = modelList.filter((category) => {
+    return selectedCategories.includes(category.category);
+  });
+
   return (
     <Container>
       <h2 className="mb-4 font-light text-2xl">Models</h2>
@@ -176,55 +198,81 @@ const Models = () => {
         <div>
           <aside
             id="default-sidebar"
-            class="z-40 h-full transition-transform -translate-x-full sm:translate-x-0"
+            class="mb-8 z-40 h-full transition-transform -translate-x-full sm:translate-x-0"
             aria-label="Sidebar"
           >
             <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
               <ul className="space-y-2">
-                {modelList.map((item, index) => (
-                  <li>
-                    <a
-                      key={item.category}
-                      href="#" // href={item.href}
+                {checkboxCategories.map((category) => {
+                  const categoryModels = modelList.find(
+                    (cat) => cat.category === category
+                  ).models;
+                  const totalModels = categoryModels.reduce(
+                    (acc, curr) => acc + 1,
+                    0
+                  );
+                  const Icon = modelList.find(
+                    (cat) => cat.category === category
+                  ).icon;
+                  return (
+                    <label
+                      key={category}
                       className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                     >
-                      <item.icon
-                        className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                      <div class="flex items-center">
+                        <input
+                          type="checkbox"
+                          value={category}
+                          onChange={handleCheckboxChange}
+                          checked={selectedCategories.includes(category)}
+                        />
+                      </div>
+                      <Icon
+                        className="ml-4 flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                         aria-hidden="true"
                       />
                       <span class="flex-1 ml-3 whitespace-nowrap">
-                        {item.category}
+                        {category}
                       </span>
                       <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                        {item.models.length}
+                        {totalModels}
                       </span>
-                    </a>
-                  </li>
-                ))}
+                    </label>
+                  );
+                })}
               </ul>
             </div>
           </aside>
         </div>
-        <div class="col-span-2">
+
+        <div class="mb-8 col-span-2">
           <div class="p-3 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <div className="h-full overflow-y-auto">
               <ul className="space-y-2">
-                {modelList[0].models.map((item, index) => (
-                  <li>
-                    <a
-                      key={item.name}
-                      href="#" // href={item.href}
-                      className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
-                    >
-                      {item.name}
-                      {/* <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                        {modelList[0].models.length}
-                      </span> */}
-                    </a>
-                    <hr />
+                {filteredModelList.map((item, index) => (
+                  <li key={item.category}>
+                    <ul>
+                      {item.models.map((model) => (
+                        <label
+                          key={model.name}
+                          href="#"
+                          className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                        >
+                          <li>{model.name}</li>
+                          <div
+                            class="ml-4 font-medium p-1 flex text-sm text-gray-800 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600"
+                            role="alert"
+                          >
+                            {item.category}
+                          </div>
+                        </label>
+                      ))}
+                    </ul>
+                    {index !== filteredModelList.length - 1 && (
+                      <hr className="mb-4 mt-4" />
+                    )}
                   </li>
                 ))}
-                {/* todo: last item no hr line */}
               </ul>
             </div>
           </div>
