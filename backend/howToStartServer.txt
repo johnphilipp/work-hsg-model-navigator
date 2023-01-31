@@ -1,0 +1,3 @@
+I always forget this:
+
+uvicorn main:app --reload
