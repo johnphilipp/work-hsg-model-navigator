@@ -1,5 +1,5 @@
 import { Container } from "../components/Container";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import { AiOutlineAudio, AiOutlinePicture } from "react-icons/ai";
 import { FaRegObjectGroup } from "react-icons/fa";
@@ -150,11 +150,37 @@ const modelList = [
 ];
 
 const Models = () => {
-  const checkboxCategories = [
-    ...new Set(modelList.map((category) => category.category)),
-  ];
-  const [selectedCategories, setSelectedCategories] =
-    useState(checkboxCategories);
+  const [categories, setCategories] = useState([]);
+  const [models, setModels] = useState([]);
+
+  useEffect(() => {
+    requestCategories();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  async function requestCategories() {
+    const res = await fetch("http://127.0.0.1:8000/categories/");
+    const json = await res.json();
+
+    console.log("Server response CATEGORIES (json): ", json.categories);
+    setCategories(json.categories);
+  }
+
+  const [selectedCategories, setSelectedCategories] = useState(categories); // TODO: for some reason this doesn't take the data, async??
+  console.log({ selectedCategories });
+
+  async function requestModels(selectedCategories) {
+    const res = await fetch("http://127.0.0.1:8000/models/", {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ categories: selectedCategories }),
+    });
+    const json = await res.json();
+    console.log("Server response MODELS (json): ", json.models);
+    setModels(json.models);
+  }
 
   const handleCheckboxChange = (e) => {
     const { value } = e.target;
@@ -162,8 +188,10 @@ const Models = () => {
       setSelectedCategories(
         selectedCategories.filter((item) => item !== value)
       );
+      requestModels(selectedCategories);
     } else {
       setSelectedCategories([...selectedCategories, value]);
+      requestModels(selectedCategories);
     }
   };
 
@@ -206,8 +234,7 @@ const Models = () => {
             <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
               <ul className="space-y-2">
                 <ModelResultsSideBar
-                  checkboxCategories={checkboxCategories}
-                  modelList={modelList}
+                  categories={categories}
                   handleCheckboxChange={handleCheckboxChange}
                   selectedCategories={selectedCategories}
                 />
@@ -220,7 +247,7 @@ const Models = () => {
           <div class="p-3 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <div className="h-full overflow-y-auto">
               <ul className="space-y-2">
-                <ModelResultsMain filteredModelList={filteredModelList} />
+                <ModelResultsMain filteredModelList={models} />
               </ul>
             </div>
           </div>
