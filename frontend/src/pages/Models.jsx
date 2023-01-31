@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import { AiOutlineAudio, AiOutlinePicture } from "react-icons/ai";
 import { FaRegObjectGroup } from "react-icons/fa";
+import ModelResultsSideBar from "../components/models/ModelResultsSideBar";
+import ModelResultsMain from "../components/models/ModelResultsMain";
 
 const modelList = [
   {
@@ -203,43 +205,12 @@ const Models = () => {
           >
             <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
               <ul className="space-y-2">
-                {checkboxCategories.map((category) => {
-                  const categoryModels = modelList.find(
-                    (cat) => cat.category === category
-                  ).models;
-                  const totalModels = categoryModels.reduce(
-                    (acc, curr) => acc + 1,
-                    0
-                  );
-                  const Icon = modelList.find(
-                    (cat) => cat.category === category
-                  ).icon;
-                  return (
-                    <label
-                      key={category}
-                      className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
-                    >
-                      <div class="flex items-center">
-                        <input
-                          type="checkbox"
-                          value={category}
-                          onChange={handleCheckboxChange}
-                          checked={selectedCategories.includes(category)}
-                        />
-                      </div>
-                      <Icon
-                        className="ml-4 flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                        aria-hidden="true"
-                      />
-                      <span class="flex-1 ml-3 whitespace-nowrap">
-                        {category}
-                      </span>
-                      <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                        {totalModels}
-                      </span>
-                    </label>
-                  );
-                })}
+                <ModelResultsSideBar
+                  checkboxCategories={checkboxCategories}
+                  modelList={modelList}
+                  handleCheckboxChange={handleCheckboxChange}
+                  selectedCategories={selectedCategories}
+                />
               </ul>
             </div>
           </aside>
@@ -249,30 +220,7 @@ const Models = () => {
           <div class="p-3 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <div className="h-full overflow-y-auto">
               <ul className="space-y-2">
-                {filteredModelList.map((item, index) => (
-                  <li key={item.category}>
-                    <ul>
-                      {item.models.map((model) => (
-                        <label
-                          key={model.name}
-                          href="#"
-                          className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
-                        >
-                          <li>{model.name}</li>
-                          <div
-                            class="ml-4 font-medium p-1 flex text-sm text-gray-800 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600"
-                            role="alert"
-                          >
-                            {item.category}
-                          </div>
-                        </label>
-                      ))}
-                    </ul>
-                    {index !== filteredModelList.length - 1 && (
-                      <hr className="mb-4 mt-4" />
-                    )}
-                  </li>
-                ))}
+                <ModelResultsMain filteredModelList={filteredModelList} />
               </ul>
             </div>
           </div>
