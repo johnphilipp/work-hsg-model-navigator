@@ -1,5 +1,6 @@
 work-hsg-model-navigator.code-workspace
 .DS_Store
+timesheet.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
