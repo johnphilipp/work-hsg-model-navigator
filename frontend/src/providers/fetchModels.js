@@ -1,7 +1,7 @@
 const fetchModels = async ({ queryKey }) => {
   const categories = queryKey[1];
 
-  if (!categories) return [];
+  if (categories.length === 0) return [];
 
   const apiRes = await fetch(`http://localhost:8000/models/${categories}`);
 
