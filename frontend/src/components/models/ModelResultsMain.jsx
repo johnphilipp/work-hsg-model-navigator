@@ -7,6 +7,7 @@ const ModelResultsMain = ({ models }) => {
         <li key={model.name}>
           <ModelCard
             category={model.category}
+            id={model.id}
             name={model.name}
             version={model.version}
             status={model.status}

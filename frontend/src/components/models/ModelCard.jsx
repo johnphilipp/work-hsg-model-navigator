@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const ModelCard = (props) => {
-  const { category, name, version, status } = props;
+  const { category, id, name, version, status } = props;
 
   const statusClass = (status) => {
     if (status === "available")
@@ -13,8 +13,8 @@ const ModelCard = (props) => {
   };
 
   return (
-    <div className="p-2 mb-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-      <Link to={`/details/${name}`}>
+    <div className="p-2 mb-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+      <Link to={`/details/${id}`}>
         <div className="flex justify-between">
           <div className="flex items-center">
             <div className="font-medium dark:text-white">{name}</div>
