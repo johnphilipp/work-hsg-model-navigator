@@ -14,10 +14,6 @@ class Models(BaseModel):
     categories: List[str]
 
 
-class Model(BaseModel):
-    id: str
-
-
 app = FastAPI()
 
 
@@ -63,7 +59,8 @@ def categories():
     return {"categories": out}
 
 
-@ app.post("/models/")
+# DELETE THIS ONCE FIXED
+@app.post("/models/")
 def models(models: Models):
     print("Received:", models.categories)
     models_data = json.load(open("data/models_data.json"))
@@ -71,9 +68,17 @@ def models(models: Models):
     return {"models": out}
 
 
-@ app.post("/model/")
-def model(model: Model):
+@app.get("/models/{categories}")
+def models(categories):
+    print("Received:", categories)
+    models_data = json.load(open("data/models_data.json"))
+    out = [x for x in models_data if x["category"] in categories]
+    return {"models": out}
+
+
+@app.get("/model/{model_id}")
+def model(model_id):
     print("Received:", model)
     models_data = json.load(open("data/models_data.json"))
-    out = [x for x in models_data if x["id"] == id]
+    out = [x for x in models_data if x["id"] == model_id]
     return {"model": out}
