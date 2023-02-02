@@ -10,6 +10,8 @@ import useToken from "./utils/hook/useToken";
 import Details from "./pages/Details";
 import Example from "./pages/Example";
 
+// NOTE: Login/Logout functionality temporarily disabled
+
 function App() {
   // const { token, setToken } = useToken();
 
