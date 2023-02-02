@@ -59,15 +59,6 @@ def categories():
     return {"categories": out}
 
 
-# DELETE THIS ONCE FIXED
-@app.post("/models/")
-def models(models: Models):
-    print("Received:", models.categories)
-    models_data = json.load(open("data/models_data.json"))
-    out = [x for x in models_data if x["category"] in models.categories]
-    return {"models": out}
-
-
 @app.get("/models/{categories}")
 def models(categories):
     print("Received:", categories)
