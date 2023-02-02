@@ -1,58 +1,39 @@
 import { Container } from "../components/Container";
 import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import { AiOutlineAudio, AiOutlinePicture } from "react-icons/ai";
 import { FaRegObjectGroup } from "react-icons/fa";
 import ModelResultsSideBar from "../components/models/ModelResultsSideBar";
 import ModelResultsMain from "../components/models/ModelResultsMain";
+import fetchCategories from "../providers/fetchCategories";
+import fetchModels from "../providers/fetchModels";
 
 // TODO: Persist state when page changes -- check out Frontend Masters section again with custom hook
 // TODO: Fix modile sidebar view
 
 const Models = () => {
-  const [categories, setCategories] = useState([]);
-  const [models, setModels] = useState([]);
-  console.log({ models });
+  const resultsCategories = useQuery(["categories"], fetchCategories);
+  const categories = resultsCategories?.data?.categories ?? [];
+  console.log({ categories });
 
-  useEffect(() => {
-    requestCategories();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  async function requestCategories() {
-    const res = await fetch("http://127.0.0.1:8000/categories/");
-    const json = await res.json();
-
-    console.log("Server response CATEGORIES (json): ", json.categories);
-    setCategories(json.categories);
-  }
-
-  const [selectedCategories, setSelectedCategories] = useState(categories); // TODO: for some reason this doesn't take the data, async??
+  const [selectedCategories, setSelectedCategories] = useState([]); // "categories" how to have them set at first render??
   console.log({ selectedCategories });
 
-  async function requestModels(selectedCategories) {
-    const res = await fetch("http://127.0.0.1:8000/models/", {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ categories: selectedCategories }),
-    });
-    const json = await res.json();
-    console.log("Server response MODELS (json): ", json.models);
-    setModels(json.models);
-  }
+  const resultsModels = useQuery(["models", selectedCategories], fetchModels);
+  const models = resultsModels?.data?.models ?? [];
+  console.log({ models });
 
   const handleCheckboxChange = (e) => {
     const { value } = e.target;
     if (selectedCategories.includes(value)) {
+      // delete
       setSelectedCategories(
         selectedCategories.filter((item) => item !== value)
       );
-      requestModels(selectedCategories);
     } else {
+      // add
       setSelectedCategories([...selectedCategories, value]);
-      requestModels(selectedCategories);
     }
   };
 
@@ -85,7 +66,7 @@ const Models = () => {
         <div>
           <aside
             id="default-sidebar"
-            class="mb-8 z-40 h-full transition-transform -translate-x-full sm:translate-x-0"
+            class="mb-6 z-40 h-full transition-transform -translate-x-full sm:translate-x-0"
             aria-label="Sidebar"
           >
             <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
@@ -100,7 +81,7 @@ const Models = () => {
           </aside>
         </div>
 
-        <div class="mb-8 col-span-2">
+        <div class="mb-6 col-span-2">
           <div class="p-3 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <div className="h-full overflow-y-auto">
               <ul className="space-y-2">
