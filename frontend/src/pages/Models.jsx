@@ -6,152 +6,13 @@ import { FaRegObjectGroup } from "react-icons/fa";
 import ModelResultsSideBar from "../components/models/ModelResultsSideBar";
 import ModelResultsMain from "../components/models/ModelResultsMain";
 
-const modelList = [
-  {
-    category: "LLMs",
-    description: "",
-    href: "#",
-    icon: HiOutlineChatBubbleLeftRight,
-    models: [
-      {
-        name: "LLM Model #1",
-        description: "",
-        href: "#",
-        inUse: false,
-        dateCreated: "",
-        dateModified: "",
-        numUsed: 42,
-      },
-      {
-        name: "LLM Model #2",
-        description: "",
-        href: "#",
-        inUse: false,
-        dateCreated: "",
-        dateModified: "",
-        numUsed: 42,
-      },
-      {
-        name: "LLM Model #3",
-        description: "",
-        href: "#",
-        inUse: false,
-        dateCreated: "",
-        dateModified: "",
-        numUsed: 42,
-      },
-      {
-        name: "LLM Model #4",
-        description: "",
-        href: "#",
-        inUse: false,
-        dateCreated: "",
-        dateModified: "",
-        numUsed: 42,
-      },
-      {
-        name: "LLM Model #5",
-        description: "",
-        href: "#",
-        inUse: false,
-        dateCreated: "",
-        dateModified: "",
-        numUsed: 42,
-      },
-    ],
-  },
-  {
-    category: "Speech2Text",
-    description: "",
-    href: "#",
-    icon: AiOutlineAudio,
-    models: [
-      {
-        name: "Speech2Text Model #1",
-        description: "",
-        href: "#",
-        inUse: false,
-        dateCreated: "",
-        dateModified: "",
-        numUsed: 42,
-      },
-      {
-        name: "Speech2Text Model #2",
-        description: "",
-        href: "#",
-        inUse: false,
-        dateCreated: "",
-        dateModified: "",
-        numUsed: 42,
-      },
-      {
-        name: "Speech2Text Model #3",
-        description: "",
-        href: "#",
-        inUse: false,
-        dateCreated: "",
-        dateModified: "",
-        numUsed: 42,
-      },
-    ],
-  },
-  {
-    category: "Image Generation",
-    description: "",
-    href: "#",
-    icon: AiOutlinePicture,
-    models: [
-      {
-        name: "Image Generation Model #1",
-        description: "",
-        href: "#",
-        inUse: false,
-        dateCreated: "",
-        dateModified: "",
-        numUsed: 42,
-      },
-      {
-        name: "Image Generation Model #2",
-        description: "",
-        href: "#",
-        inUse: false,
-        dateCreated: "",
-        dateModified: "",
-        numUsed: 42,
-      },
-    ],
-  },
-  {
-    category: "Image Recognition",
-    description: "",
-    href: "#",
-    icon: FaRegObjectGroup,
-    models: [
-      {
-        name: "Image Recognition Model #1",
-        description: "",
-        href: "#",
-        inUse: false,
-        dateCreated: "",
-        dateModified: "",
-        numUsed: 42,
-      },
-      {
-        name: "Image Recognition Model #2",
-        description: "",
-        href: "#",
-        inUse: false,
-        dateCreated: "",
-        dateModified: "",
-        numUsed: 42,
-      },
-    ],
-  },
-];
+// TODO: Persist state when page changes -- check out Frontend Masters section again with custom hook
+// TODO: Fix modile sidebar view
 
 const Models = () => {
   const [categories, setCategories] = useState([]);
   const [models, setModels] = useState([]);
+  console.log({ models });
 
   useEffect(() => {
     requestCategories();
@@ -194,10 +55,6 @@ const Models = () => {
       requestModels(selectedCategories);
     }
   };
-
-  const filteredModelList = modelList.filter((category) => {
-    return selectedCategories.includes(category.category);
-  });
 
   return (
     <Container>
@@ -247,7 +104,7 @@ const Models = () => {
           <div class="p-3 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <div className="h-full overflow-y-auto">
               <ul className="space-y-2">
-                <ModelResultsMain filteredModelList={models} />
+                <ModelResultsMain models={models} />
               </ul>
             </div>
           </div>
