@@ -1,14 +1,22 @@
 [
   {
-    "category": "LLMs"
+    "name": "LLMs",
+    "imgUrl": "https://img.icons8.com/material/256/speech-bubble.png"
   },
   {
-    "category": "Speech2Text"
+    "name": "Speech2Text",
+    "imgUrl": "https://img.icons8.com/ios-glyphs/256/microphone.png"
   },
   {
-    "category": "Image Generation"
+    "name": "Image Generation",
+    "imgUrl": "https://img.icons8.com/ios-glyphs/256/image.png"
   },
   {
-    "category": "Image Recognition"
+    "name": "Image Recognition",
+    "imgUrl": "https://img.icons8.com/external-others-inmotus-design/256/external-Detect-basic-web-ui-elements-others-inmotus-design.png"
+  },
+  {
+    "name": "Fictional Category",
+    "imgUrl": "https://img.icons8.com/ios-glyphs/256/magic-crystal-ball.png"
   }
 ]

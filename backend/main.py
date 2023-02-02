@@ -55,8 +55,7 @@ def login(login: Login):
 @app.get("/categories/")
 def categories():
     categories_data = json.load(open("data/categories_data.json"))
-    out = [x["category"] for x in categories_data]
-    return {"categories": out}
+    return {"categories": categories_data}
 
 
 @app.get("/models/{categories}")
