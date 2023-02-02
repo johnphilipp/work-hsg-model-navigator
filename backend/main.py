@@ -15,8 +15,7 @@ class Models(BaseModel):
 
 
 class Model(BaseModel):
-    category: str
-    name: str
+    id: str
 
 
 app = FastAPI()
@@ -45,7 +44,7 @@ def read_root():
 @app.post("/login/")
 def login(login: Login):
     print("Received:", login.email, login.password)
-    user_credentials = json.load(open("user_credentials.json"))
+    user_credentials = json.load(open("data/user_credentials.json"))
     if login.email not in user_credentials.keys():
         print("Email not found:", login.email)
         return HTTPException(status_code=401, detail="User not found")
@@ -59,15 +58,15 @@ def login(login: Login):
 
 @app.get("/categories/")
 def categories():
-    models_data = json.load(open("models_data.json"))
-    out = [x["category"] for x in models_data]
+    categories_data = json.load(open("data/categories_data.json"))
+    out = [x["category"] for x in categories_data]
     return {"categories": out}
 
 
 @ app.post("/models/")
 def models(models: Models):
     print("Received:", models.categories)
-    models_data = json.load(open("models_data.json"))
+    models_data = json.load(open("data/models_data.json"))
     out = [x for x in models_data if x["category"] in models.categories]
     return {"models": out}
 
@@ -75,7 +74,6 @@ def models(models: Models):
 @ app.post("/model/")
 def model(model: Model):
     print("Received:", model)
-    models_data = json.load(open("models_data.json"))
-    sub = [x for x in models_data if x["category"] == model.category]
-    out = [x for x in sub[0]["models"] if x["name"] == model.name]
+    models_data = json.load(open("data/models_data.json"))
+    out = [x for x in models_data if x["id"] == id]
     return {"model": out}
