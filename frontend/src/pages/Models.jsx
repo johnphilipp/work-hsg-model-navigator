@@ -1,28 +1,22 @@
 import { Container } from "../components/Container";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
-import { AiOutlineAudio, AiOutlinePicture } from "react-icons/ai";
-import { FaRegObjectGroup } from "react-icons/fa";
 import ModelResultsSideBar from "../components/models/ModelResultsSideBar";
 import ModelResultsMain from "../components/models/ModelResultsMain";
 import fetchCategories from "../providers/fetchCategories";
 import fetchModels from "../providers/fetchModels";
 
-// TODO: Persist state when page changes -- check out Frontend Masters section again with custom hook
-// TODO: Fix modile sidebar view
-
 const Models = () => {
   const resultsCategories = useQuery(["categories"], fetchCategories);
   const categories = resultsCategories?.data?.categories ?? [];
-  console.log({ categories });
+  // console.log({ categories });
 
-  const [selectedCategories, setSelectedCategories] = useState([]); // "categories" how to have them set at first render??
-  console.log({ selectedCategories });
+  const [selectedCategories, setSelectedCategories] = useState([]); // "[categories]" -- TODO: How to have them set at first render? How to persist state when page changes?
+  // console.log({ selectedCategories });
 
   const resultsModels = useQuery(["models", selectedCategories], fetchModels);
   const models = resultsModels?.data?.models ?? [];
-  console.log({ models });
+  // console.log({ models });
 
   const handleCheckboxChange = (e) => {
     const { value } = e.target;
@@ -66,26 +60,28 @@ const Models = () => {
         <div>
           <aside
             id="default-sidebar"
-            class="mb-6 z-40 h-full transition-transform -translate-x-full sm:translate-x-0"
+            class="z-40 h-full transition-transform -translate-x-full sm:translate-x-0"
             aria-label="Sidebar"
           >
-            <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-              <ul className="space-y-2">
-                <ModelResultsSideBar
-                  categories={categories}
-                  handleCheckboxChange={handleCheckboxChange}
-                  selectedCategories={selectedCategories}
-                />
-              </ul>
+            <div className="h-full px-3 py-4 rounded-md overflow-y-auto bg-slate-100 dark:bg-slate-800">
+              <div className="mb-2 text-lg font-md">Categories:</div>
+              <ModelResultsSideBar
+                categories={categories}
+                handleCheckboxChange={handleCheckboxChange}
+                selectedCategories={selectedCategories}
+              />
             </div>
           </aside>
         </div>
 
         <div class="mb-6 col-span-2">
-          <div class="p-3 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+          <div class="">
             <div className="h-full overflow-y-auto">
               <ul className="space-y-2">
-                <ModelResultsMain models={models} />
+                <ModelResultsMain
+                  models={models}
+                  selectedCategories={selectedCategories}
+                />
               </ul>
             </div>
           </div>

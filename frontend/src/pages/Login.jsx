@@ -45,11 +45,19 @@ export default function Login({ setToken }) {
 
   return (
     <Container>
+      <div className="mt-8 md:mt-28" />
       <AuthLayout>
         <div className="flex flex-col">
-          <Link to="/" aria-label="Home">
-            <Logo className="h-10 w-auto" />
-          </Link>
+          <div className="mt-12 flex items-center gap-2">
+            <Link to="/" aria-label="Home">
+              <Logo className="-mt-3 h-10 w-auto" />
+            </Link>
+            <Link to="/" aria-label="Home">
+              <div className="-mt-2 text-2xl font-extrabold text-slate-700">
+                ModelNavigator
+              </div>
+            </Link>
+          </div>
           <div className="mt-20">
             <h2 className="text-lg font-semibold text-gray-900">
               Sign in to your account

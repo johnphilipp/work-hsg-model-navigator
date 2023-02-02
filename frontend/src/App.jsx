@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HeaderPublic } from "./components/header/HeaderPublic";
 import { HeaderPrivate } from "./components/header/HeaderPrivate";
-import { Container } from "./components/Container";
 import Dashboard from "./pages/Dashboard";
 import Models from "./pages/Models";
 import Login from "./pages/Login";
@@ -16,25 +15,25 @@ import Example from "./pages/Example";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: Infinity,
-      cacheTime: Infinity,
+      staleTime: Infinity, // change to " 1000 * 60 * (seconds) " ?
+      cacheTime: Infinity, // change to " 1000 * 60 * (seconds) " ?
     },
   },
 });
 
 function App() {
-  // const { token, setToken } = useToken();
+  const { token, setToken } = useToken();
 
-  // if (!token) {
-  //   return (
-  //     <BrowserRouter>
-  // <QueryClientProvider client={queryClient}>
-  //       <HeaderPublic /> {/* Change header to not display memu */}
-  //       <Login setToken={setToken} />
-  // </QueryClientProvider>
-  //     </BrowserRouter>
-  //   );
-  // }
+  if (!token) {
+    return (
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          {/* <HeaderPublic /> */}
+          <Login setToken={setToken} />
+        </QueryClientProvider>
+      </BrowserRouter>
+    );
+  }
 
   return (
     <BrowserRouter>
