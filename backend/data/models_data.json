@@ -96,6 +96,18 @@
     "numUsed": 42
   },
   {
+    "id": "61be2622-ae36-11ed-afa1-0242ac120002",
+    "category": "Image Generation",
+    "name": "Stable Diffusion",
+    "description": "First model we are testing...",
+    "version": "1.0",
+    "url": "http://127.0.0.1:8000",
+    "status": "offline",
+    "dateCreated": "",
+    "dateModified": "",
+    "numUsed": 42
+  },
+  {
     "id": "cad7d215-235c-4a32-a29f-13a5d4b67f9c",
     "category": "Image Generation",
     "name": "Some Toaster",
