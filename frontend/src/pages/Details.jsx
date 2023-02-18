@@ -3,6 +3,16 @@ import { useQuery } from "@tanstack/react-query";
 import { Container } from "../components/Container";
 import fetchModel from "../providers/fetchModel";
 import Spinner from "../components/Spinner";
+import InterfaceStableDiffusion from "../components/details/interfaceStableDiffusion";
+import InterfacePlaceholder from "../components/details/interfacePlaceholder";
+
+const Interface = (category) => {
+  if (category === "Image Generation") {
+    return <InterfaceStableDiffusion />;
+  } else {
+    return <InterfacePlaceholder />;
+  }
+};
 
 const Details = () => {
   const { id } = useParams();
@@ -56,9 +66,7 @@ const Details = () => {
       <div className="mt-6 text-base font-normal text-gray-900">
         {model.description}
       </div>
-      <div className="flex items-center justify-center mt-6 mb-6 h-80 text-slate-400 bg-slate-100 rounded-md">
-        Interface...
-      </div>
+      {Interface(model.category)}
     </Container>
   );
 };
