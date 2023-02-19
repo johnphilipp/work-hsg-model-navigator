@@ -86,16 +86,14 @@ def model(model_id):
 # This method would be running on a different microservice -- only here for testing purposes
 @app.post("/loadModel")
 def load_model():
-    """
-    Zusätzlich muss im Header stehen:
-    - Authorization: Bearer daGoveitgididNeltifwoylchISlith5
-    """
     time.sleep(3)
     return {"message": "Model loaded successfully"}
 
 
+# This method would be running on a different microservice -- only here for testing purposes
 @app.post("/runModel")
 def run_model(props: RunModel):
+    time.sleep(3)
     return {
         "prompt": props.prompt,
         "images": [
@@ -104,5 +102,3 @@ def run_model(props: RunModel):
             "iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAIAAADTED8xAAAC4klEQVR4nOzVMQ3CYBhFUUJ+VUwkuGLBCwMrtVAdtVEBlfEN9xwFb7l567c/bsz5f4/pCWn36QEwSQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASFvb+zW9Ie35OacnpHkA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgLQrAAD//6ToCPIWlmGlAAAAAElFTkSuQmCC"
         ]
     }
-
-    return True

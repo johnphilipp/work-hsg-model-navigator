@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const InterfaceStableDiffusionForm = ({ runResponse, setRunResponse }) => {
+const StableDiffusionForm = ({ runResponse, setRunResponse }) => {
   const [formData, setFormData] = useState({
     prompt: "",
     negative_prompt: null,
@@ -138,4 +138,4 @@ const InterfaceStableDiffusionForm = ({ runResponse, setRunResponse }) => {
   );
 };
 
-export default InterfaceStableDiffusionForm;
+export default StableDiffusionForm;

@@ -3,14 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 import { Container } from "../components/Container";
 import fetchModel from "../providers/fetchModel";
 import Spinner from "../components/Spinner";
-import InterfaceStableDiffusion from "../components/details/interfaceStableDiffusion";
-import InterfacePlaceholder from "../components/details/interfacePlaceholder";
+import StableDiffusion from "../components/details/StableDiffusion";
+import Placeholder from "../components/details/Placeholder";
 
 const Interface = (category) => {
   if (category === "Image Generation") {
-    return <InterfaceStableDiffusion />;
+    return <StableDiffusion />;
   } else {
-    return <InterfacePlaceholder />;
+    return <Placeholder />;
   }
 };
 

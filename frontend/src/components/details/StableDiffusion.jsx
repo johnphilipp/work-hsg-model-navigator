@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import InterfaceStableDiffusionForm from "./interfaceStableDiffusionForm";
+import StableDiffusionForm from "./StableDiffusionForm";
 import Spinner from "../Spinner";
-import InterfaceStableDiffusionResult from "./interfaceStableDiffusionResult";
+import StableDiffusionResult from "./StableDiffusionResult";
 
-const InterfaceStableDiffusion = () => {
+const StableDiffusion = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [loadResponse, setLoadResponse] = useState(null);
   const [error, setError] = useState(null);
@@ -49,13 +49,13 @@ const InterfaceStableDiffusion = () => {
       ) : (
         <div className="flex flex-row space-x-4 p-4">
           <div className="flex-1">
-            <InterfaceStableDiffusionForm
+            <StableDiffusionForm
               runResponse={runResponse}
               setRunResponse={setRunResponse}
             />
           </div>
           <div className="flex-1">
-            <InterfaceStableDiffusionResult
+            <StableDiffusionResult
               runResponse={runResponse}
               setRunResponse={setRunResponse}
             />
@@ -66,4 +66,4 @@ const InterfaceStableDiffusion = () => {
   );
 };
 
-export default InterfaceStableDiffusion;
+export default StableDiffusion;

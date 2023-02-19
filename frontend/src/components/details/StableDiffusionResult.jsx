@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const InterfaceStableDiffusionResult = ({ runResponse, setRunResponse }) => {
+const StableDiffusionResult = ({ runResponse, setRunResponse }) => {
   useEffect(() => {
     console.log({ runResponse });
   }, [runResponse]);
@@ -44,4 +44,4 @@ const InterfaceStableDiffusionResult = ({ runResponse, setRunResponse }) => {
   );
 };
 
-export default InterfaceStableDiffusionResult;
+export default StableDiffusionResult;
