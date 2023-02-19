@@ -12,15 +12,25 @@ const StableDiffusion = () => {
   const [runResponseIsLoading, setRunResponseIsLoading] = useState(false);
 
   const handleButtonClick = () => {
+    console.log(process.env.REACT_APP_API_AUTH);
+    console.log(process.env.REACT_APP_MODEL_SD_LOAD_URL);
+
     setIsLoading(true);
 
-    fetch(process.env.REACT_APP_MODEL_SD_LOAD_URL, {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", process.env.REACT_APP_API_AUTH);
+
+    var requestOptions = {
       method: "POST",
-      headers: {
-        Authorization: process.env.REACT_APP_API_AUTH,
-      },
-    })
-      .then((response) => response.json())
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(process.env.REACT_APP_MODEL_SD_LOAD_URL, requestOptions)
+      .then((response) => {
+        console.log("loadModel", response);
+        response.json();
+      })
       .then((data) => {
         setIsLoading(false);
         setLoadResponse(data);
