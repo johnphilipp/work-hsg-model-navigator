@@ -40,33 +40,53 @@ const Details = () => {
 
   return (
     <Container>
-      <h2 className="mb-4 font-light text-2xl">Details</h2>
-      <div className="mb-2 rounded-lg dark:text-white">
-        <div className="flex justify-between">
-          <div className="flex items-center">
-            <div className="font-medium dark:text-white">{model.name}</div>
-            <span className="ml-4 bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
-              v{model.version}
-            </span>
-            <div className="ml-2 bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">
-              {model.category}
+      <h2 className="mb-4 font-light text-2xl">{model.name}</h2>
+      <div className="mb-6 overflow-hidden bg-white shadow rounded-lg">
+        <div className="border-gray-200 px-4 py-5 sm:p-0">
+          <dl className="sm:divide-y sm:divide-gray-200">
+            <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">Category</dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                {model.category}
+              </dd>
             </div>
-          </div>
-          <div>
-            <div className="ml-2 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400">
-              <span className={statusClass(model.status)}> </span>
-              {model.status}
+            <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">Version</dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                {model.version}
+              </dd>
             </div>
-          </div>
-        </div>
-        <div className="text-sm text-gray-500 dark:text-gray-400">
-          Date created: Mar 14, 2022 ・ Last used: Feb 1, 2023
+            <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">Status</dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                {model.status}
+                <span className={statusClass(model.status)}> </span>
+              </dd>
+            </div>
+            <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">
+                Date created
+              </dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                Mar 14, 2022
+              </dd>
+            </div>
+            <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">Last used</dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                Feb 19, 2023
+              </dd>
+            </div>
+            <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">Description</dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                {model.description}
+              </dd>
+            </div>
+          </dl>
         </div>
       </div>
-      <div className="mt-6 text-base font-normal text-gray-900">
-        {model.description}
-      </div>
-      {Interface(model.category)}
+      <div className="mb-6">{Interface(model.category)}</div>
     </Container>
   );
 };

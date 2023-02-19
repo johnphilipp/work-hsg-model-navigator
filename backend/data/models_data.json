@@ -99,7 +99,7 @@
     "id": "61be2622-ae36-11ed-afa1-0242ac120002",
     "category": "Image Generation",
     "name": "Stable Diffusion",
-    "description": "First model we are testing...",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu eros non turpis tincidunt ultricies. Vivamus scelerisque eget dolor sit amet feugiat. Ut sodales lectus sit amet porttitor interdum. Donec quis fringilla lectus. Donec malesuada neque non massa lacinia cursus sed eget tortor. Vestibulum ante ipsum primis in faucibus orci.",
     "version": "1.0",
     "url": "http://127.0.0.1:8000",
     "status": "offline",

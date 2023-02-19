@@ -24,16 +24,16 @@ const queryClient = new QueryClient({
 function App() {
   const { token, setToken } = useToken();
 
-  if (!token) {
-    return (
-      <BrowserRouter>
-        <QueryClientProvider client={queryClient}>
-          {/* <HeaderPublic /> */}
-          <Login setToken={setToken} />
-        </QueryClientProvider>
-      </BrowserRouter>
-    );
-  }
+  // if (!token) {
+  //   return (
+  //     <BrowserRouter>
+  //       <QueryClientProvider client={queryClient}>
+  //         {/* <HeaderPublic /> */}
+  //         <Login setToken={setToken} />
+  //       </QueryClientProvider>
+  //     </BrowserRouter>
+  //   );
+  // }
 
   return (
     <BrowserRouter>

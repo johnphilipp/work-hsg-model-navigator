@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Spinner from "../Spinner";
+import Alert from "../Alert";
 
 const StableDiffusionResult = ({ runResponse, runResponseIsLoading }) => {
   useEffect(() => {
@@ -7,16 +8,25 @@ const StableDiffusionResult = ({ runResponse, runResponseIsLoading }) => {
   }, [runResponse]);
 
   if (runResponseIsLoading) {
-    return <Spinner />;
+    return (
+      <div className="mt-12 md:mt-0 flex justify-center">
+        <Spinner />
+      </div>
+    );
   }
 
   if (runResponse.length === 0) {
-    return <div>No results</div>;
+    return <Alert msg={"No results"} />;
   }
 
   return (
     <>
-      {runResponse.prompt}
+      <div className="italic mt-6 md:mt-2 block mb-2 text-lg font-light text-gray-900 dark:text-white">
+        {'"'}
+        {runResponse.prompt}
+        {'"'}
+        <hr className="mt-2 mb-4" />
+      </div>
       <div className="md:columns-3">
         {runResponse.images.map((image, index) => (
           <img
