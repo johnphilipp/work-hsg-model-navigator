@@ -23,17 +23,20 @@ const StableDiffusionForm = ({
   };
 
   const handleSubmit = (event) => {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", process.env.REACT_APP_API_AUTH);
+    myHeaders.append("Content-Type", "application/json");
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: JSON.stringify(formData),
+    };
+
     event.preventDefault();
     setRunResponseIsLoading(true);
 
-    fetch(process.env.REACT_APP_MODEL_SD_RUN_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: process.env.REACT_APP_API_AUTH,
-      },
-      body: JSON.stringify(formData),
-    })
+    fetch(process.env.REACT_APP_MODEL_SD_RUN_URL, requestOptions)
       .then((response) => response.json())
       .then((data) => {
         setRunResponseIsLoading(false);

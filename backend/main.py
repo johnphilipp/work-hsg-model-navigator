@@ -93,6 +93,7 @@ def load_model():
 # This method would be running on a different microservice -- only here for testing purposes
 @app.post("/runModel")
 def run_model(props: RunModel):
+    print("Received:", props)
     time.sleep(3)
     return {
         "prompt": props.prompt,
