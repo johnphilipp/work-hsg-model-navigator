@@ -7,8 +7,9 @@ const StableDiffusion = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [loadResponse, setLoadResponse] = useState(null);
   const [error, setError] = useState(null);
-  const [isComplete, setIsComplete] = useState(false);
+  const [loadIsComplete, setLoadIsComplete] = useState(false);
   const [runResponse, setRunResponse] = useState([]);
+  const [runResponseIsLoading, setRunResponseIsLoading] = useState(false);
 
   const handleButtonClick = () => {
     setIsLoading(true);
@@ -23,7 +24,7 @@ const StableDiffusion = () => {
       .then((data) => {
         setIsLoading(false);
         setLoadResponse(data);
-        setIsComplete(true);
+        setLoadIsComplete(true);
       })
       .catch((error) => {
         setIsLoading(false);
@@ -32,33 +33,39 @@ const StableDiffusion = () => {
   };
 
   return (
-    <div className="flex items-center justify-center mt-6 mb-6 min-h-80 text-slate-400 bg-slate-100 rounded-md">
-      {!isComplete ? (
-        <>
-          <button
-            type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            onClick={handleButtonClick}
-          >
-            Load model
-          </button>
-          {isLoading && <Spinner />}
-          {loadResponse && <div>Response: {loadResponse}</div>}
-          {error && <div>Error: {error.message}</div>}
-        </>
-      ) : (
-        <div className="flex flex-row space-x-4 p-4">
-          <div className="flex-1">
+    <div className="flex items-center justify-center mt-6 mb-6 text-slate-400 bg-slate-100 rounded-md">
+      {loadIsComplete ? (
+        <div className="md:grid grid-cols-3">
+          <div className="bg-slate-200 p-4">
             <StableDiffusionForm
               runResponse={runResponse}
               setRunResponse={setRunResponse}
+              runResponseIsLoading={runResponseIsLoading}
+              setRunResponseIsLoading={setRunResponseIsLoading}
             />
           </div>
-          <div className="flex-1">
+          <div className="col-span-2 p-4">
             <StableDiffusionResult
               runResponse={runResponse}
-              setRunResponse={setRunResponse}
+              runResponseIsLoading={runResponseIsLoading}
             />
+          </div>
+        </div>
+      ) : (
+        <div class="flex h-96">
+          <div class="m-auto">
+            {!isLoading && (
+              <button
+                type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                onClick={handleButtonClick}
+              >
+                Load model
+              </button>
+            )}
+            {isLoading && <Spinner />}
+            {loadResponse && <div>Response: {loadResponse}</div>}
+            {error && <div>Error: {error.message}</div>}
           </div>
         </div>
       )}

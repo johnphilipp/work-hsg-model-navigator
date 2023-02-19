@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-const StableDiffusionForm = ({ runResponse, setRunResponse }) => {
+const StableDiffusionForm = ({
+  runResponse,
+  setRunResponse,
+  runResponseIsLoading,
+  setRunResponseIsLoading,
+}) => {
   const [formData, setFormData] = useState({
     prompt: "",
     negative_prompt: null,
@@ -8,7 +13,6 @@ const StableDiffusionForm = ({ runResponse, setRunResponse }) => {
     number_of_steps: 50,
     seed: null,
   });
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const handleChange = (event) => {
@@ -20,7 +24,7 @@ const StableDiffusionForm = ({ runResponse, setRunResponse }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setIsLoading(true);
+    setRunResponseIsLoading(true);
 
     fetch("http://localhost:8000/runModel", {
       method: "POST",
@@ -32,11 +36,11 @@ const StableDiffusionForm = ({ runResponse, setRunResponse }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setIsLoading(false);
+        setRunResponseIsLoading(false);
         setRunResponse(data);
       })
       .catch((error) => {
-        setIsLoading(false);
+        setRunResponseIsLoading(false);
         setError(error);
       });
   };
@@ -132,7 +136,7 @@ const StableDiffusionForm = ({ runResponse, setRunResponse }) => {
         type="submit"
         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
       >
-        {isLoading ? "Loading..." : "Submit"}
+        {runResponseIsLoading ? "Loading..." : "Submit"}
       </button>
     </form>
   );
