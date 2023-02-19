@@ -1,7 +1,7 @@
 const Alert = ({ msg }) => {
   return (
     <div
-      class="flex p-4 text-sm text-blue-800 rounded-md bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+      class="shadow flex p-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
       role="alert"
     >
       <svg

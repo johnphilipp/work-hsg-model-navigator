@@ -62,7 +62,7 @@ const StableDiffusion = () => {
           </div>
         </div>
       ) : (
-        <div className="shadow flex h-96 bg-slate-200 rounded-md">
+        <div className="shadow flex h-96 bg-slate-200 rounded-lg">
           <div className="m-auto">
             {!isLoading && (
               <button

@@ -63,7 +63,7 @@ const Models = () => {
             class="z-40 h-full transition-transform -translate-x-full sm:translate-x-0"
             aria-label="Sidebar"
           >
-            <div className="h-full px-3 py-4 rounded-md overflow-y-auto bg-slate-100 dark:bg-slate-800">
+            <div className="shadow h-full px-3 py-4 rounded-lg overflow-y-auto bg-slate-100 dark:bg-slate-800">
               <div className="mb-2 text-lg font-md">Categories:</div>
               <ModelResultsSideBar
                 categories={categories}
