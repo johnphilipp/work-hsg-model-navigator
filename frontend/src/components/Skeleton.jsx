@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
+import { Logo } from "./Logo";
 
 const user = {
   name: "Tom Cook",
@@ -49,11 +50,7 @@ export default function Skeleton() {
                     <div className="flex h-16 items-center justify-between px-4 sm:px-0">
                       <div className="flex items-center">
                         <div className="flex-shrink-0">
-                          <img
-                            className="h-8 w-8"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                            alt="Your Company"
-                          />
+                          <Logo className="h-10 w-auto" />
                         </div>
                         <div className="hidden md:block">
                           <div className="ml-10 flex items-baseline space-x-4">
