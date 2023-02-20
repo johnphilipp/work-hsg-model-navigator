@@ -47,7 +47,7 @@ export default function Login({ setToken }) {
     <Container>
       <div className="mt-8 md:mt-28" />
       <AuthLayout>
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
           <div className="mt-12 flex items-center gap-2">
             <Link to="/" aria-label="Home">
               <Logo className="-mt-3 h-10 w-auto" />

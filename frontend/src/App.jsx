@@ -10,8 +10,6 @@ import useToken from "./utils/hook/useToken";
 import Details from "./pages/Details";
 import Example from "./pages/Example";
 
-// NOTE: Login/Logout functionality temporarily disabled
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -24,16 +22,16 @@ const queryClient = new QueryClient({
 function App() {
   const { token, setToken } = useToken();
 
-  // if (!token) {
-  //   return (
-  //     <BrowserRouter>
-  //       <QueryClientProvider client={queryClient}>
-  //         {/* <HeaderPublic /> */}
-  //         <Login setToken={setToken} />
-  //       </QueryClientProvider>
-  //     </BrowserRouter>
-  //   );
-  // }
+  if (!token) {
+    return (
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          {/* <HeaderPublic /> */}
+          <Login setToken={setToken} />
+        </QueryClientProvider>
+      </BrowserRouter>
+    );
+  }
 
   return (
     <BrowserRouter>
