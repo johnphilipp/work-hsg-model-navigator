@@ -39,7 +39,7 @@ const Details = () => {
   };
 
   return (
-    <Container>
+    <>
       <h2 className="mb-4 font-light text-2xl">{model.name}</h2>
       <div className="mb-6 overflow-hidden bg-white shadow rounded-lg">
         <div className="border-gray-200 px-4 py-5 sm:p-0">
@@ -86,8 +86,8 @@ const Details = () => {
           </dl>
         </div>
       </div>
-      <div className="mb-6">{Interface(model.category)}</div>
-    </Container>
+      <div>{Interface(model.category)}</div>
+    </>
   );
 };
 

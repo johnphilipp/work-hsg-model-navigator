@@ -1,14 +1,13 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { HeaderPublic } from "./components/header/HeaderPublic";
-import { HeaderPrivate } from "./components/header/HeaderPrivate";
 import Dashboard from "./pages/Dashboard";
 import Models from "./pages/Models";
 import Login from "./pages/Login";
 import useToken from "./utils/hook/useToken";
 import Details from "./pages/Details";
 import Example from "./pages/Example";
+import Skeleton from "./components/Skeleton";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,7 +25,6 @@ function App() {
     return (
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          {/* <HeaderPublic /> */}
           <Login setToken={setToken} />
         </QueryClientProvider>
       </BrowserRouter>
@@ -36,15 +34,21 @@ function App() {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <HeaderPrivate />
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/models" element={<Models />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/details/:id" element={<Details />} />
-          <Route path="/example" element={<Example />} />
-        </Routes>
+        <Skeleton />
+        <main className="-mt-32">
+          <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+            <div className="rounded-lg bg-white px-5 py-6 shadow sm:px-6">
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/models" element={<Models />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/details/:id" element={<Details />} />
+                <Route path="/example" element={<Example />} />
+              </Routes>
+            </div>
+          </div>
+        </main>
       </QueryClientProvider>
     </BrowserRouter>
   );
